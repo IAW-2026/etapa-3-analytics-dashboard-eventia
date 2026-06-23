@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
 import { CalendarDays } from 'lucide-react';
-import TarjetaGraficoEventos from '../eventos/components/graficoEventos';
+import TransaccionesCanceladasCard from '../ventas/components/TransaccionesCanceladasCard';
+import TotalGananciasCard from '../ventas/components/TotalGananciasCard';
+import TotalVentasCard from '../ventas/components/TotalVentasCard';
+import TarjetaGraficoEntradas from '../entradas/components/graficoEntradas';
+import ClientesActivos from '../clientes/components/ClientesActivos';
 import TarjetaGraficoEventosMasVendidos from '../pedidos/components/graficoPedidos';
+import TarjetaGraficoCategorias from '../eventos/components/graficoEventos';
 
 export const metadata: Metadata = {
   title: 'Estadísticas - Eventia',
@@ -29,8 +34,18 @@ export default function EstadisticasPage() {
           </button>
         </div>
 
-        <TarjetaGraficoEventos />
-        <TarjetaGraficoEventosMasVendidos />
+        <div className="eventia-card-stack">
+          <div className="eventia-metrics-row">
+            <TransaccionesCanceladasCard />
+            <TotalGananciasCard />
+            <TotalVentasCard />
+            <ClientesActivos />
+            <TarjetaGraficoEventosMasVendidos />
+            <TarjetaGraficoCategorias />
+          </div>
+          <TarjetaGraficoEntradas />
+        </div>
+        
       </section>
     </div>
   );
