@@ -208,13 +208,21 @@ body {
   line-height: 1.6;
 }
 
-.eventia-card-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
+.eventia-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.eventia-metrics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: stretch;
 }
 
 .eventia-card {
+  width: 100%;
   min-height: 156px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -224,11 +232,12 @@ body {
 
 .eventia-stat-card {
   display: flex;
-  min-height: 156px;
+  flex: 1 1 240px;
+  min-height: 210px;
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
-  padding: 22px;
+  padding: 24px;
 }
 
 .eventia-stat-card-header {
@@ -260,6 +269,8 @@ body {
 }
 
 .eventia-stat-card-value {
+  display: block;
+  margin-bottom: 8px;
   color: var(--color-primary);
   font-family: var(--ff-display, Georgia, serif);
   font-size: clamp(44px, 6vw, 68px);
@@ -274,18 +285,6 @@ body {
   line-height: 1.55;
 }
 
-.eventia-card--wide {
-  grid-column: span 8;
-}
-
-.eventia-card--side {
-  grid-column: span 4;
-}
-
-.eventia-card--full {
-  grid-column: 1 / -1;
-}
-
 @media (max-width: 860px) {
   .eventia-page-shell {
     width: min(100% - 32px, 1180px);
@@ -297,9 +296,8 @@ body {
     flex-direction: column;
   }
 
-  .eventia-card--wide,
-  .eventia-card--side {
-    grid-column: 1 / -1;
+  .eventia-stat-card {
+    flex-basis: 100%;
   }
 }
 

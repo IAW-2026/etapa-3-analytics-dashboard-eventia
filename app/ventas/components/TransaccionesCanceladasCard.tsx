@@ -1,16 +1,7 @@
 import { XCircle } from 'lucide-react';
-import { getTransacciones } from '@/app/ventas/lib/api';
-import {
-  filtrarTransaccionesCanceladas,
-  type TransaccionConEstado,
-} from '@/app/ventas/lib/filtrarMetricas';
-
-type TransaccionesResponse =
-  | TransaccionConEstado[]
-  | {
-      data?: TransaccionConEstado[];
-      transacciones?: TransaccionConEstado[];
-    };
+import { getTransacciones } from '@/app/ventas/lib/apiPayments';
+import { filtrarTransaccionesCanceladas } from '@/app/ventas/lib/filtrarTransacciones';
+import type { TransaccionesResponse } from '@/app/estadisticas/types';
 
 function obtenerListaTransacciones(data: TransaccionesResponse) {
   if (Array.isArray(data)) {
@@ -39,7 +30,7 @@ export default async function TransaccionesCanceladasCard() {
   }
 
   return (
-    <article className="eventia-card eventia-card--side eventia-stat-card">
+    <article className="eventia-card eventia-stat-card">
       <div className="eventia-stat-card-header">
         <p className="eventia-stat-card-label">Transacciones canceladas</p>
         <span className="eventia-stat-card-icon" aria-hidden="true">

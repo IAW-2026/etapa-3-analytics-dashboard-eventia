@@ -1,12 +1,10 @@
+import type { TransaccionConEstado } from '@/app/estadisticas/types';
+
 export const ESTADOS_TRANSACCION = {
   CANCELADA: 'CANCELADA',
 } as const;
 
 export type EstadoTransaccion = (typeof ESTADOS_TRANSACCION)[keyof typeof ESTADOS_TRANSACCION];
-
-export type TransaccionConEstado = {
-  estado_transaccion?: string | null;
-};
 
 export function obtenerEstadoTransaccion(transaccion: TransaccionConEstado) {
   return transaccion.estado_transaccion?.toUpperCase();
