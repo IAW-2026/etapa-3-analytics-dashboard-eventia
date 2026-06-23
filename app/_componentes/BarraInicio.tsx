@@ -69,8 +69,7 @@ export default function BarraInicio() {
           ) : (
             <SignInButton mode="modal">
               <button
-                className="font-label rounded-[11px] px-4 py-2 text-[14px] font-bold transition hover:brightness-95 hover:-translate-y-px"
-                style={{ background: 'var(--color-accent)', color: 'var(--color-accent-foreground)' }}
+                className="eventia-button eventia-button--accent"
               >
                 Ingresar
               </button>

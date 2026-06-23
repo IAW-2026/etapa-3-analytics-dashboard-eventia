@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { ArrowRight, Users, UserCog, CreditCard, ShoppingCart, Ticket, CalendarDays, Link } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Eventia - Descubrí y creá eventos',
@@ -8,8 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const createEventHref = '/organizador/eventos/nuevo';
-
   return (
     // Fondo: dos radiales suaves + crema base, igual al mockup
     <div
@@ -23,14 +22,14 @@ export default function HomePage() {
       }}
     >
       
-      <HeroSection createEventHref={createEventHref} />
+      <HeroSection />
     </div>
   );
 }
 
 /* ─── HERO ─────────────────────────────────────────────────────────────────── */
 
-function HeroSection({ createEventHref }: { createEventHref: string }) {
+function HeroSection() {
   return (
     <section className="grid min-h-[calc(100svh-72px)] grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
       {/* Columna izquierda: copy + CTA */}
@@ -52,15 +51,14 @@ function HeroSection({ createEventHref }: { createEventHref: string }) {
         </h1>
 
         <p className="font-body max-w-[430px] text-[18px] leading-[1.6]" style={{ color: 'var(--color-text-muted)' }}>
-          La plataforma para monitorear y gestionar eventos.
+          La plataforma para monitorear todas las estadísticas de tus eventos.
         </p>
         
         {/* CONTENEDOR DE BOTONES (CTAs) */}
         <div className="mt-2 flex flex-wrap gap-4 font-label text-[14px] font-bold">
           <Link
-            href='organizador/estadisticas'
-            className="group inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 transition-all hover:bg-black/5 active:scale-[0.98]"
-            style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
+            href='./estadisticas'
+            className="eventia-button eventia-button--accent group"
           >
             Ver Estadísticas
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
