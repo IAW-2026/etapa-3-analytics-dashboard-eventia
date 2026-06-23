@@ -107,7 +107,7 @@
 }
 
 body {
-  font-family: var(--ff-body, Arial, Helvetica, sans-serif);
+  font-family: var(--ff-body, Climate, Helvetica, sans-serif);
 }
 
 /* Fuentes del sistema de diseño Eventia — variables seteadas por next/font en el html */
