@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { CalendarDays } from 'lucide-react';
+import TarjetaGraficoEventos from '../eventos/components/graficoEventos';
+import TarjetaGraficoEventosMasVendidos from '../pedidos/components/graficoPedidos';
 
 export const metadata: Metadata = {
   title: 'Estadísticas - Eventia',
@@ -27,11 +29,8 @@ export default function EstadisticasPage() {
           </button>
         </div>
 
-        <div className="eventia-card-grid">
-          <div className="eventia-card eventia-card--wide" />
-          <div className="eventia-card eventia-card--side" />
-          <div className="eventia-card eventia-card--full" />
-        </div>
+        <TarjetaGraficoEventos />
+        <TarjetaGraficoEventosMasVendidos />
       </section>
     </div>
   );
