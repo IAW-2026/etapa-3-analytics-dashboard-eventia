@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { ArrowRight, Users, UserCog, CreditCard, ShoppingCart, Ticket, CalendarDays } from 'lucide-react';
+import { ArrowRight, Users, UserCog, CreditCard, ShoppingCart, Ticket, CalendarDays, Link } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Eventia - Descubrí y creá eventos',
@@ -24,7 +24,6 @@ export default function HomePage() {
     >
       
       <HeroSection createEventHref={createEventHref} />
-      <FeaturesSection />
     </div>
   );
 }
@@ -56,6 +55,18 @@ function HeroSection({ createEventHref }: { createEventHref: string }) {
           La plataforma para monitorear y gestionar eventos.
         </p>
         
+        {/* CONTENEDOR DE BOTONES (CTAs) */}
+        <div className="mt-2 flex flex-wrap gap-4 font-label text-[14px] font-bold">
+          <Link
+            href='organizador/estadisticas'
+            className="group inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 transition-all hover:bg-black/5 active:scale-[0.98]"
+            style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
+          >
+            Ver Estadísticas
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+
       </div>
 
       {/* Columna derecha: imagen */}
@@ -71,93 +82,3 @@ function HeroSection({ createEventHref }: { createEventHref: string }) {
     </section>
   );
 }
-
-/* ─── FEATURES ──────────────────────────────────────────────────────────────── */
-
-const FEATURES = [
-  { icon: Users,        iconBg: 'var(--color-primary)',     title: 'clientes',      desc: 'Gestioná tu base de clientes y su historial de compras.' },
-  { icon: UserCog,      iconBg: 'var(--color-pattern-dot)', title: 'organizadores', desc: 'Administrá los organizadores y sus permisos dentro de la plataforma.' },
-  { icon: CreditCard,   iconBg: 'var(--color-primary)',     title: 'transacciones', desc: 'Seguí cada pago realizado por los clientes.' },
-  { icon: ShoppingCart, iconBg: 'var(--color-pattern-dot)', title: 'pedidos',       desc: 'Controlá el estado de los pedidos.' },
-  { icon: Ticket,       iconBg: 'var(--color-primary)',     title: 'entradas',      desc: 'Visualizá las entradas vendidas de cada evento.' },
-  { icon: CalendarDays, iconBg: 'var(--color-pattern-dot)', title: 'eventos',       desc: 'Administrá todos los eventos publicados en la plataforma.' },
-];
-
-function FeaturesSection() {
-  return (
-    <section
-      className="relative px-8 py-[72px] sm:px-14"
-      style={{
-        background: `
-          radial-gradient(700px 380px at 12% 0%, rgba(254,158,162,.18), transparent 62%),
-          linear-gradient(180deg, #f9f3e4, #f3eddf)
-        `,
-      }}
-    >
-      {/* Textura de puntitos a baja opacidad */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage: 'radial-gradient(var(--color-primary) 1.4px, transparent 1.4px)',
-          backgroundSize: '22px 22px',
-        }}
-      />
-
-      {/* Encabezado centrado */}
-      <div className="relative mx-auto mb-[44px] max-w-[560px] text-center">
-        <span
-          className="font-label mb-4 inline-flex items-center rounded-full px-[14px] py-[7px] text-[11px] font-extrabold uppercase tracking-[0.14em]"
-          style={{ background: 'var(--color-accent)', color: 'var(--color-accent-foreground)' }}
-        >
-          Control Plane
-        </span>
-        <h2
-          className="font-display mt-4 leading-[1] tracking-[-0.01em]"
-          style={{ fontSize: 'clamp(20px,2.6vw,32px)', color: 'var(--color-ink)' }}
-        >
-          Todo lo que necesitas para gestionar tus eventos en un solo lugar
-        </h2>
-      </div>
-
-      {/* Grid de 6 cards */}
-      <div className="relative grid grid-cols-1 gap-[16px] sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map(({ icon: Icon, iconBg, title, desc }) => (
-          <div
-            key={title}
-            className="flex flex-col justify-between rounded-[24px] border p-5 sm:p-[30px] transition hover:-translate-y-1"
-            style={{
-              background: 'linear-gradient(180deg, rgba(254, 158, 162, 0.22), var(--color-surface))',
-              borderColor: 'var(--color-border)',
-              boxShadow: 'var(--color-shadow)',
-            }}
-          >
-            <div>
-              <div
-                className="mb-[18px] flex h-[52px] w-[52px] items-center justify-center rounded-[15px] text-white"
-                style={{ background: iconBg }}
-              >
-                <Icon size={26} strokeWidth={1.7} />
-              </div>
-              <h3 className="font-display text-[24px] leading-[1.05]" style={{ color: 'var(--color-ink)' }}>
-                {title}
-              </h3>
-              <p className="font-body mt-[10px] text-[13px] leading-[1.5]" style={{ color: 'var(--color-text-muted)' }}>
-                {desc}
-              </p>
-            </div>
-            <div className="mt-[18px] flex justify-end">
-              <div
-                className="flex h-8 w-8 items-center justify-center rounded-full"
-                style={{ background: 'var(--color-primary)' }}
-              >
-                <ArrowRight size={15} className="text-white" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-
