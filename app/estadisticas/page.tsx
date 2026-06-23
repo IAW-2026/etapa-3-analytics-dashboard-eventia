@@ -5,6 +5,8 @@ import TotalGananciasCard from '../ventas/components/TotalGananciasCard';
 import TotalVentasCard from '../ventas/components/TotalVentasCard';
 import TarjetaGraficoEntradas from '../entradas/components/graficoEntradas';
 import ClientesActivos from '../clientes/components/ClientesActivos';
+import TarjetaGraficoEventosMasVendidos from '../pedidos/components/graficoPedidos';
+import TarjetaGraficoCategorias from '../eventos/components/graficoEventos';
 
 export const metadata: Metadata = {
   title: 'Estadísticas - Eventia',
@@ -38,6 +40,8 @@ export default function EstadisticasPage() {
             <TotalGananciasCard />
             <TotalVentasCard />
             <ClientesActivos />
+            <TarjetaGraficoEventosMasVendidos />
+            <TarjetaGraficoCategorias />
           </div>
           <TarjetaGraficoEntradas />
         </div>
