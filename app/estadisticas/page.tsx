@@ -10,6 +10,7 @@ import TarjetaGraficoCategorias from '../eventos/components/graficoEventos';
 import { esAdmin } from '../lib/rolAdmin';
 import { ShieldAlert } from "lucide-react";
 import Link from "next/link"; 
+import { currentUser } from "@clerk/nextjs/server";
 
 export const metadata: Metadata = {
   title: ' Eventia - Estadísticas',
@@ -17,15 +18,10 @@ export const metadata: Metadata = {
 };
 
 
-interface PageProps {
-  params: Promise<{ [key: string]: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
-export default async function Page({ params, searchParams }: PageProps) {
-  const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
-  const admin = await esAdmin({ params: resolvedParams, searchParams: resolvedSearchParams });
+export default async function Page() {
+  const user = await currentUser();
+  const publicMetadata = user?.publicMetadata;
+  const admin = publicMetadata ? esAdmin(publicMetadata) : false;
 
   if (!admin) {
     return (
