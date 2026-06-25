@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import TransaccionesCanceladasCard from '../ventas/components/TransaccionesCanceladasCard';
 import TotalGananciasCard from '../ventas/components/TotalGananciasCard';
 import TotalVentasCard from '../ventas/components/TotalVentasCard';
-import TarjetaGraficoEntradas from '../entradas/components/graficoEntradas';
+import {TarjetaGraficoEntradas, TarjetaPorcentajeAsistencia} from '../entradas/components/graficoEntradas';
 import ClientesActivos from '../clientes/components/ClientesActivos';
 import OrganizadoresActivos from '../organizadores/components/OrganizadoresActivos';
 import TarjetaGraficoEventosMasVendidos from '../pedidos/components/graficoPedidos';
@@ -89,7 +89,9 @@ export default async function Page() {
           <div className="eventia-card p-6">
             <TarjetaGraficoEntradas />
           </div>
-
+          <div className="eventia-card p-6">
+            <TarjetaPorcentajeAsistencia />
+          </div>
         </div>
       </section>
     </div>
