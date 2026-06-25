@@ -8,18 +8,14 @@ URL: https://etapa-3-analytics-dashboard-eventia.vercel.app/
 ---
 Permite consultar las métricasa principales del sistema.
 
-Métricas disponibles:
--Sobre Transacciones:
+Métricas disponibles
    - Transacciones canceladas
    - Ganancia por comisión
    - Neto para vendedores
--Sobre Usuarios
    - Compradores registrados
    - Organizadores registrados
--Sobre Eventos
    - Eventos más vendidos
    - Distribución de eventos por categoria
--Sobre Entradas
    - Distribución de entradas por estado
 ---
 Para poder ver las métricas el usuario debe estar logueado como Administrador de cualquiera de las 4 apps, Buyer, Seller, Shipping o Payments.
