@@ -1,22 +1,64 @@
 import type { Metadata } from 'next';
-import { CalendarDays } from 'lucide-react';
 import TransaccionesCanceladasCard from '../ventas/components/TransaccionesCanceladasCard';
 import TotalGananciasCard from '../ventas/components/TotalGananciasCard';
 import TotalVentasCard from '../ventas/components/TotalVentasCard';
 import TarjetaGraficoEntradas from '../entradas/components/graficoEntradas';
 import ClientesActivos from '../clientes/components/ClientesActivos';
+import OrganizadoresActivos from '../organizadores/components/OrganizadoresActivos';
 import TarjetaGraficoEventosMasVendidos from '../pedidos/components/graficoPedidos';
 import TarjetaGraficoCategorias from '../eventos/components/graficoEventos';
+import { esAdmin } from '../lib/rolAdmin';
+import { ShieldAlert } from "lucide-react";
+import Link from "next/link"; 
 
 export const metadata: Metadata = {
-  title: 'Estadísticas - Eventia',
+  title: ' Eventia - Estadísticas',
   description: 'Panel de métricas de Eventia.',
 };
 
-export default function EstadisticasPage() {
+
+interface PageProps {
+  params: Promise<{ [key: string]: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function Page({ params, searchParams }: PageProps) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const admin = await esAdmin({ params: resolvedParams, searchParams: resolvedSearchParams });
+
+  if (!admin) {
+    return (
+      <div className="eventia-page flex flex-col items-center justify-center p-6 text-center">
+        <div className="eventia-card max-w-md flex flex-col items-center p-8 bg-[var(--color-surface-soft)]">
+          
+          <div className="bg-[var(--color-primary)] text-[var(--color-primary-foreground)] w-16 h-16 rounded-2xl flex items-center justify-center mb-5 shadow-md">
+            <ShieldAlert className="w-9 h-9 stroke-[2]" />
+          </div>
+
+          <h1 className="font-display text-3xl text-[var(--color-primary)] mb-3 uppercase tracking-tight">
+            Acceso Restringido
+          </h1>
+
+          <p className="font-body text-sm text-[var(--color-text-muted)] max-w-sm mb-6 leading-relaxed">
+            Este módulo está reservado exclusivamente para el personal de administración central de Eventia.
+          </p> 
+
+          <Link
+            href="/"
+            className="eventia-button eventia-button--accent w-full text-center"
+          >
+            Volver al Inicio
+          </Link>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="eventia-page">
       <section className="eventia-page-shell">
+
+        {/* HEADER DE LA PÁGINA */}
         <div className="eventia-page-header">
           <div>
             <span className="eventia-page-kicker">Estadísticas</span>
@@ -28,24 +70,31 @@ export default function EstadisticasPage() {
             </p>
           </div>
 
-          <button className="eventia-button eventia-button--accent" type="button">
-            <CalendarDays className="h-4 w-4" />
-            Este mes
-          </button>
         </div>
 
+        {/* CONTENEDOR PRINCIPAL */}
         <div className="eventia-card-stack">
           <div className="eventia-metrics-row">
             <TransaccionesCanceladasCard />
             <TotalGananciasCard />
             <TotalVentasCard />
             <ClientesActivos />
-            <TarjetaGraficoEventosMasVendidos />
-            <TarjetaGraficoCategorias />
+            <OrganizadoresActivos />
           </div>
-          <TarjetaGraficoEntradas />
+
+          <div className="eventia-metrics-row">
+            <div className="eventia-card flex-1 min-w-[300px] p-6">
+              <TarjetaGraficoEventosMasVendidos />
+            </div>
+            <div className="eventia-card flex-1 min-w-[300px] p-6">
+              <TarjetaGraficoCategorias />
+            </div>
+          </div>
+          <div className="eventia-card p-6">
+            <TarjetaGraficoEntradas />
+          </div>
+
         </div>
-        
       </section>
     </div>
   );

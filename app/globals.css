@@ -107,13 +107,21 @@
 }
 
 body {
-  font-family: var(--ff-body, Climate, Helvetica, sans-serif);
+  font-family: var(--ff-body, "Bricolage Grotesque", Helvetica, sans-serif);
 }
 
-/* Fuentes del sistema de diseño Eventia — variables seteadas por next/font en el html */
-.font-display { font-family: var(--ff-display, Georgia, serif); }
-.font-body    { font-family: var(--ff-body, Arial, sans-serif); }
-.font-label   { font-family: var(--ff-label, Arial, sans-serif); }
+
+.font-display { 
+  font-family: var(--ff-display, "Climate Crisis", Georgia, serif); 
+}
+
+.font-body { 
+  font-family: var(--ff-body, "Bricolage Grotesque", sans-serif); 
+}
+
+.font-label { 
+  font-family: var(--ff-label, "Bricolage Grotesque", sans-serif); 
+}
 
 .eventia-button {
   display: inline-flex;
@@ -188,8 +196,8 @@ body {
   margin-top: 18px;
   max-width: 760px;
   color: var(--color-ink);
-  font-family: var(--ff-display, Georgia, serif);
-  font-size: clamp(40px, 5vw, 72px);
+  font-family: var(--ff-display, "Climate Crisis", serif);
+  font-size: clamp(35px, 5vw, 72px);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 0.92;
@@ -203,7 +211,7 @@ body {
   margin-top: 18px;
   max-width: 560px;
   color: var(--color-text-muted);
-  font-family: var(--ff-body, Arial, sans-serif);
+  font-family: var(--ff-body, "Bricolage Grotesque", sans-serif);
   font-size: 17px;
   line-height: 1.6;
 }
@@ -249,7 +257,7 @@ body {
 
 .eventia-stat-card-label {
   color: var(--color-text-muted);
-  font-family: var(--ff-label, Arial, sans-serif);
+  font-family: var(--ff-label, "Bricolage Grotesque", sans-serif);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -272,7 +280,7 @@ body {
   display: block;
   margin-bottom: 8px;
   color: var(--color-primary);
-  font-family: var(--ff-display, Georgia, serif);
+  font-family: var(--ff-display, "Bricolage Grotesque", serif);
   font-size: clamp(44px, 6vw, 68px);
   line-height: 0.9;
 }
@@ -280,7 +288,7 @@ body {
 .eventia-stat-card-copy {
   max-width: 360px;
   color: var(--color-text-muted);
-  font-family: var(--ff-body, Arial, sans-serif);
+  font-family: var(--ff-body, "Bricolage Grotesque", sans-serif);
   font-size: 14px;
   line-height: 1.55;
 }

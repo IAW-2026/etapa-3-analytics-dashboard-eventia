@@ -4,7 +4,7 @@ import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { esAdmin } from '@/app/lib/rolAdmin'; // función pura de chequeo de rol
 import Image from 'next/image';
 import Link from 'next/link';
-import { BarChart3, CalendarDays, Menu, X } from 'lucide-react';
+import { BarChart3, CalendarDays, Menu, X, LineChart } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -17,17 +17,12 @@ function HomeIcon() {
 }
 
 export default function BarraInicio() {
-  const pathname = usePathname(); //devuelve url actual 
+  const pathname = usePathname();
   const { isSignedIn, user } = useUser();
-  // true-> alguien logueado false-> nadie logueado y en user todos los datos del usuario y metadata
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // setea en false mobileMenuOpen y lo cambia a true cuando se apreta el boton del menu en mobile, y vuelve a false cuando se apreta el boton de cerrar menu o se hace click en algun link del menu
-  
-  // chequeo de rol admin: si el usuario está logueado y tiene rol adminSeller, entonces isAdmin es true
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Chequeo de rol admin
   const isAdmin = isSignedIn && esAdmin((user?.publicMetadata ?? {}) as Record<string, unknown>);
-  const mainLinkHref = isAdmin ? '/admin/reportes' : '/organizador/eventos';
-  const mainLinkLabel = isAdmin ? 'Panel de administrador' : 'Mis Eventos';
-  const mainLinkActive = isAdmin ? pathname.startsWith('/admin') : pathname.startsWith('/organizador');
-  const mainLinkIcon = isAdmin ? <BarChart3 size={17} /> : <CalendarDays size={17} />;
 
   return (
     <>
@@ -58,9 +53,16 @@ export default function BarraInicio() {
           </Link>
         </div>
 
+        {/* Menú de Escritorio (Desktop) */}
         <div className="hidden items-center gap-8 sm:flex">
-          <NavPill href="/" active={pathname === '/'} icon={<HomeIcon />}>Inicio</NavPill>
-          <NavPill href={mainLinkHref} active={mainLinkActive} icon={mainLinkIcon}>{mainLinkLabel}</NavPill>
+          <NavPill href="/" active={pathname === '/'} icon={<HomeIcon />}>
+            Inicio
+          </NavPill>
+          {isSignedIn && (
+            <NavPill href="/estadisticas" active={pathname === '/estadisticas'} icon={<LineChart size={17} />}>
+              Estadísticas
+            </NavPill>
+          )}
         </div>
 
         <div>
@@ -68,9 +70,7 @@ export default function BarraInicio() {
             <UserButton />
           ) : (
             <SignInButton mode="modal">
-              <button
-                className="eventia-button eventia-button--accent"
-              >
+              <button className="eventia-button eventia-button--accent">
                 Ingresar
               </button>
             </SignInButton>
@@ -78,6 +78,7 @@ export default function BarraInicio() {
         </div>
       </nav>
 
+      {/* Menú Móvil (Mobile) */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 sm:hidden">
           <button
@@ -100,24 +101,29 @@ export default function BarraInicio() {
               </button>
             </div>
             <nav className="flex flex-col gap-1 py-4" onClick={() => setMobileMenuOpen(false)}>
-              <Link
-                href="/"
-                className="mx-2 flex items-center gap-2.5 border-l-[3px] px-4 py-2 text-[13px] font-medium transition-colors no-underline"
-                style={pathname === '/'
-                  ? { borderColor: 'var(--color-primary)', background: '#f5e8e4', color: 'var(--color-primary)' }
-                  : { borderColor: 'transparent', color: '#5a3a35' }}
-              >
-                <HomeIcon /> Inicio
-              </Link>
-              <Link
-                href={mainLinkHref}
-                className="mx-2 flex items-center gap-2.5 border-l-[3px] px-4 py-2 text-[13px] font-medium transition-colors no-underline"
-                style={mainLinkActive
-                  ? { borderColor: 'var(--color-primary)', background: '#f5e8e4', color: 'var(--color-primary)' }
-                  : { borderColor: 'transparent', color: '#5a3a35' }}
-              >
-                {mainLinkIcon} {mainLinkLabel}
-              </Link>
+              {!isSignedIn ? (
+                <Link
+                  href="/"
+                  className="mx-2 flex items-center gap-2.5 border-l-[3px] px-4 py-2 text-[13px] font-medium transition-colors no-underline"
+                  style={pathname === '/'
+                    ? { borderColor: 'var(--color-primary)', background: '#f5e8e4', color: 'var(--color-primary)' }
+                    : { borderColor: 'transparent', color: '#5a3a35' }}
+                >
+                  <HomeIcon /> Inicio
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/estadisticas"
+                    className="mx-2 flex items-center gap-2.5 border-l-[3px] px-4 py-2 text-[13px] font-medium transition-colors no-underline"
+                    style={pathname === '/estadisticas'
+                      ? { borderColor: 'var(--color-primary)', background: '#f5e8e4', color: 'var(--color-primary)' }
+                      : { borderColor: 'transparent', color: '#5a3a35' }}
+                  >
+                    <LineChart size={17} /> Estadísticas
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
         </div>

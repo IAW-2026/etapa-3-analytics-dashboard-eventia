@@ -62,12 +62,12 @@ export default function TarjetaGraficoEntradas() {
   }
 
   return (
-    <div className="eventia-card flex w-full flex-col justify-between p-7">
-      <div>
-        <h3 className="font-display text-2xl tracking-wide text-(--color-ink)">
+    <div className="eventia-card flex flex-col justify-between h-full overflow-hidden">
+      <div className="p-6 pb-0">
+        <h3 className="eventia-stat-card-label">
           Distribución de entradas
         </h3>
-        <p className="font-body mb-5 mt-1 text-xs text-(--color-text-muted)">
+        <p className="eventia-stat-card-copy mt-1">
           Agrupado por estado de transacción
         </p>
       </div>

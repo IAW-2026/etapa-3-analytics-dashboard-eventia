@@ -10,11 +10,11 @@ type DataGrafico = {
 };
 
 const COLORES_EVENTIA = [
-  "var(--color-primary)",        
+  "var(--color-primary)",
   "var(--color-primary-vivid)",
-  "var(--color-primary-muted)",  
-  "var(--color-accent)",        
-  "var(--color-text-muted)",   
+  "var(--color-primary-muted)",
+  "var(--color-accent)",
+  "var(--color-text-muted)",
 ];
 
 export default function TarjetaGraficoCategorias() {
@@ -26,7 +26,7 @@ export default function TarjetaGraficoCategorias() {
     async function cargarDatos() {
       try {
         setLoading(true);
-        
+
         const eventos = await fetchEventos();
 
         const conteo = eventos.reduce((acc: Record<string, number>, evento) => {
@@ -71,60 +71,64 @@ export default function TarjetaGraficoCategorias() {
   }
 
   return (
-    <div className="eventia-card p-6 w-full max-w-(--size-xl) flex flex-col justify-between">
-      <div>
-        <h3 className="font-display text-2xl text-(--color-ink) tracking-wide">
-          Eventos por Categoría
-        </h3>
-        <p className="font-body text-xs text-(--color-text-muted) mt-1 mb-4">
-          Distribución total de la oferta de eventos disponibles
-        </p>
-      </div>
-
-      {/* Contenedor del Gráfico de Torta */}
-      <div className="w-full h-60 font-label flex items-center justify-center">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={50} 
-              outerRadius={80}
-              paddingAngle={4}
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell 
-                  key={`cell-${index}`} 
-                  fill={COLORES_EVENTIA[index % COLORES_EVENTIA.length]} 
-                />
-              ))}
-            </Pie>
-            
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "var(--color-surface-soft)",
-                borderRadius: "var(--radius)",
-                color: "var(--color-ink)",
-                border: "1px solid var(--color-border)",
-                fontFamily: "var(--ff-label, Arial, sans-serif)",
-                fontSize: "12px",
-                boxShadow: "var(--color-shadow)"
-              }}
-              formatter={(value) => [`${value} eventos`, "Total"]}
-            />
-
-            <Legend 
-              verticalAlign="bottom" 
-              height={36}
-              iconType="circle"
-              iconSize={8}
-              wrapperStyle={{ fontSize: '11px', color: 'var(--color-text-muted)' }}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
+  <div className="eventia-card flex flex-col justify-between h-full overflow-hidden">
+    <div className="p-6 pb-0">
+      <h3 className="eventia-stat-card-label">
+        Eventos por Categoría
+      </h3>
+      <p className="eventia-stat-card-copy mt-1">
+        Distribución total de la oferta de eventos disponibles
+      </p>
     </div>
-  );
+
+    <div className="w-full h-64 font-label mt-4">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}  
+            outerRadius={95}
+            paddingAngle={4}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`} 
+                fill={COLORES_EVENTIA[index % COLORES_EVENTIA.length]} 
+              />
+            ))}
+          </Pie>
+          
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "var(--color-surface-soft)",
+              borderRadius: "var(--radius)",
+              color: "var(--color-ink)",
+              border: "1px solid var(--color-border)",
+              fontFamily: "var(--ff-label, Arial, sans-serif)",
+              fontSize: "12px",
+              boxShadow: "var(--color-shadow)"
+            }}
+            formatter={(value) => [`${value} eventos`, "Total"]}
+          />
+
+          <Legend 
+            verticalAlign="bottom" 
+            height={44}
+            iconType="circle"
+            iconSize={8}
+            wrapperStyle={{ 
+              fontSize: '11px', 
+              color: 'var(--color-text-muted)',
+              fontFamily: 'var(--ff-label, Arial, sans-serif)',
+              paddingBottom: '12px'
+            }}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+);
 }

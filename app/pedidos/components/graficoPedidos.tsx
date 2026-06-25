@@ -44,12 +44,12 @@ export default function TarjetaGraficoEventosMasVendidos() {
   }
 
   return (
-    <div className="eventia-card p-6 w-full max-w-(--size-xl) flex flex-col justify-between">
-      <div>
-        <h3 className="font-display text-2xl text-(--color-ink) tracking-wide">
+    <div className="eventia-card flex flex-col justify-between h-full overflow-hidden">
+      <div className="p-6 pb-0">
+        <h3 className="eventia-stat-card-label">
           Top Eventos Más Vendidos
         </h3>
-        <p className="font-body text-xs text-(--color-text-muted) mt-1 mb-5">
+        <p className="eventia-stat-card-copy mt-1">
           Ranking en base a la cantidad total de entradas adquiridas por los usuarios
         </p>
       </div>
@@ -60,11 +60,11 @@ export default function TarjetaGraficoEventosMasVendidos() {
             <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--color-border)" />
             <XAxis type="number" stroke="var(--color-text-muted)" fontSize={11} tickLine={false} />
             <YAxis dataKey="name" type="category" stroke="var(--color-text-muted)" fontSize={11} tickLine={false} width={100} />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: "var(--color-surface-soft)", 
-                borderRadius: "var(--radius)", 
-                color: "var(--color-ink)", 
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "var(--color-surface-soft)",
+                borderRadius: "var(--radius)",
+                color: "var(--color-ink)",
                 border: "1px solid var(--color-border)",
                 fontFamily: "var(--ff-label, Arial, sans-serif)",
                 fontSize: "12px",
@@ -74,12 +74,12 @@ export default function TarjetaGraficoEventosMasVendidos() {
               cursor={{ fill: "var(--color-surface-soft-2)", opacity: 0.4 }}
               formatter={(value) => [`${value} entradas`, "Total Vendido"]}
             />
-            <Bar 
-              dataKey="cantidad" 
-              fill="var(--color-primary-muted)" 
+            <Bar
+              dataKey="cantidad"
+              fill="var(--color-primary-muted)"
               activeBar={{ fill: "var(--color-primary-vivid)" }}
-              radius={[0, 6, 6, 0]} 
-              barSize={24} 
+              radius={[0, 6, 6, 0]}
+              barSize={24}
             />
           </BarChart>
         </ResponsiveContainer>
