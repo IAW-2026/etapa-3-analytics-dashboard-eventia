@@ -13,7 +13,6 @@ export default function TarjetaGraficoEventosMasVendidos() {
     async function cargarDatos() {
       try {
         setLoading(true);
-        // Llamamos a la función que ya hace todo el cruce y ordenamiento en el servidor 🚀
         const ranking = await fetchTopEventosMasVendidos();
         setData(ranking);
       } catch (err) {
